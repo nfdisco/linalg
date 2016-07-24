@@ -1,0 +1,509 @@
+% \iffalse
+% The structure of this DTX file is taken from:
+% http://www.texdev.net/2009/10/06/a-model-dtx-file/
+%<*internal>
+\iffalse
+%</internal>
+%<*readme>
+----------------------------------------------------------------
+linalg --- Convenience macros for typesetting linear algebra
+E-mail: eac@opmbx.org
+Released under the LaTeX Project Public License v1.3c or later
+See http://www.latex-project.org/lppl.txt
+----------------------------------------------------------------
+
+This package sets up various packages and defines a series of macros to aid
+the writing of mathematical texts that contain algebraic notation.  It is
+intended for the personal use of its author and it has only been tested with
+the XeTeX engine.
+
+To install this package in the user's directory tree on a Unix system do:
+
+  xelatex linalg.dtx
+  xelatex linalg.dtx
+  ctanify -d `kpsewhich --var-value TEXMFHOME` -- \
+    linalg.ins linalg.pdf README.txt
+
+(Notice that xelatex is run twice.)
+
+%</readme>
+%<*internal>
+\fi
+\def\nameofplainTeX{plain}
+\ifx\fmtname\nameofplainTeX\else
+  \expandafter\begingroup
+\fi
+%</internal>
+%<*install>
+\input docstrip.tex
+\keepsilent
+\askforoverwritefalse
+\preamble
+----------------------------------------------------------------
+linalg --- Convenience macros for typesetting linear algebra
+E-mail: eac@opmbx.org
+Released under the LaTeX Project Public License v1.3c or later
+See http://www.latex-project.org/lppl.txt
+----------------------------------------------------------------
+
+\endpreamble
+\postamble
+
+Copyright (C) 2016 by E. A. Calveras <eac@opmbx.org>
+
+This work may be distributed and/or modified under the
+conditions of the LaTeX Project Public License (LPPL), either
+version 1.3c of this license or (at your option) any later
+version.  The latest version of this license is in the file:
+
+http://www.latex-project.org/lppl.txt
+
+This work is "maintained" (as per LPPL maintenance status) by
+E. A. Calveras.
+
+This work consists of the file  linalg.dtx
+and the derived files           linalg.ins,
+                                linalg.pdf and
+                                linalg.sty.
+
+\endpostamble
+\usedir{tex/latex/linalg}
+\generate{
+  \file{\jobname.sty}{\from{\jobname.dtx}{package}}
+}
+%</install>
+%<install>\endbatchfile
+%<*internal>
+\usedir{source/latex/linalg}
+\generate{
+  \file{\jobname.ins}{\from{\jobname.dtx}{install}}
+}
+\nopreamble\nopostamble
+\usedir{doc/latex/linalg}
+\generate{
+  \file{README.txt}{\from{\jobname.dtx}{readme}}
+}
+\ifx\fmtname\nameofplainTeX
+  \expandafter\endbatchfile
+\else
+  \expandafter\endgroup
+\fi
+%</internal>
+%<*driver>
+\documentclass[a4paper,11pt]{ltxdoc}
+\usepackage{\jobname}
+\usepackage{doctools}
+\usepackage[documentation]{tcolorbox}
+\usepackage{metalogo}           % XeTeX logo
+\selectcolormodel{Gray}         % from xcolor
+\tcbset{%
+  docexample/.style={%
+    colback=white,
+    boxrule=0pt,
+    opacityframe=0,
+    boxsep=0pt,
+    right=0pt,
+    top=.5ex,
+    bottom=.5ex,
+    middle=1em,
+    before skip=\medskipamount,
+    after skip=\medskipamount,
+    fontlower=\normalsize,
+    documentation listing options={%
+      aboveskip=0pt,
+      belowskip=0pt,
+      basicstyle={\ttfamily\normalsize}%
+    }%
+  },
+  color definition=black,
+  color option=black
+}
+\setmainfont{TeX Gyre Pagella}
+\setmathfont{TeX Gyre Pagella Math}
+\DisableCrossrefs
+\OnlyDescription                % do not print the source code
+\begin{document}
+  \DocInput{\jobname.dtx}
+\end{document}
+
+%</driver>
+% \fi
+%\GetFileInfo{\jobname.sty}
+%
+%\title{%
+%\textsf{linalg} ---
+% Convenience macros for typesetting linear algebra
+% \thanks{This file describes version \fileversion, last revised
+% \filedate.}%
+%}
+%\author{E.\ A.\ Calveras\thanks{E-mail: eac@opmbx.org}}
+%\date{Released \filedate}
+%
+%\maketitle
+%
+%\begin{abstract}
+%  This package sets up various packages and defines a series of macros to
+%  aid the writing of mathematical texts that contain algebraic notation.
+%\end{abstract}
+%
+%\changes{v1.0}{2016/07/24}{First public release}
+%
+%\section{Package Loading and Setup}
+% 
+%This package has no options.
+%
+%Once \package{linalg} has been loaded in the usual way with
+%\docAuxCommand*{usepackage}, it will automatically load the packages
+%\package{amsmath} and \package{amssymb} (via \package{mathtools}),
+%\package{array} as well as \package{unicode-math} (which, in turn, loads
+%\package{fontspec}).
+%
+%\subsection{Font Settings}
+%The default fonts for regular text and for maths may be set using the
+%interfaces provided by \package{fontspec} and \package{unicode-math}
+%respectively.  For example, the following lines in the preamble
+%\iffalse
+%<*example>
+%\fi
+\begin{dispListing}
+\setmainfont{TeX Gyre Termes}
+\setmathfont[Scale=MatchLowercase]{STIX Math}
+\end{dispListing}
+%\iffalse
+%</example>
+%\fi
+%\noindent will load the TeX Gyre Termes font family for use in text mode and
+%the STIX Math font for maths.  For further details, refer to the
+%documentation of the above-mentioned packages.
+%
+%\subsection{Maths style}
+%By default, Latin and Greek letters are typeset in italics when regular
+%weight is used and in upright shape when the bold variants are used, as
+%shown in the table below
+%\begin{center}
+% \begin{tabular}{ll}
+%   Weight      & Example \\[\smallskipamount]
+%   \hline\noalign{\smallskip}
+%   Regular     & $a,b,A,B,\gamma,\delta,\Gamma,\Delta$ \\
+%   Bold        & $\av,\bv,\Am,\Bm,\gammav,\deltav,\Gammam,\Deltam$
+% \end{tabular}
+%\end{center}
+%
+%The default typographic style may be changed using
+%\docAuxCommand*{unimathsetup}.  For example:
+%\iffalse
+%<*example>
+%\fi
+\begin{dispListing}
+\unimathsetup{math-style=ISO,bold-style=ISO}
+\end{dispListing}
+%\iffalse
+%</example>
+%\fi
+%\noindent
+%selects italics for both regular and bold variants.  See
+%\package{unicode-math}'s documentation for details on the different styles
+%available.
+%
+%\section{Macros}
+%\subsection{Symbols Representing Vectors and Matrices}
+%\DescribeMacro{\vct}\DescribeMacro{\mtr} The macros \docAuxCommand*{vct} and
+%\docAuxCommand*{mtr} are provided to denote vectors and matrices in math
+%mode.  The arguments to these commands are typeset in boldface.  (To change
+%this behaviour the user may redefine the macros.)
+%
+%In addition, the following shorthands are defined for Latin and Greek
+%lowercase letters:
+%\begin{center}
+%  \begin{tabular}{llllllll}
+%    $\av$ &\cs{av} & $\bv$ &\cs{bv} & $\cv$ &\cs{cv} & $\dv$ &\cs{dv} \\
+%    $\ev$ &\cs{ev} & $\fv$ &\cs{fv} & $\gv$ &\cs{gv} & $\hvec$ &\cs{hvec} \\
+%    $\iv$ &\cs{iv} & $\jv$ &\cs{jv} & $\kv$ &\cs{kv} & $\lv$ &\cs{lv} \\
+%    $\mv$ &\cs{mv} & $\nv$ &\cs{nv} & $\ov$ &\cs{ov} & $\pv$ &\cs{pv} \\
+%    $\qv$ &\cs{qv} & $\rv$ &\cs{rv} & $\sv$ &\cs{sv} & $\tv$ &\cs{tv} \\
+%    $\uv$ &\cs{uv} & $\vv$ &\cs{vv} & $\wv$ &\cs{wv} & $\xv$ &\cs{xv} \\
+%    $\yv$ &\cs{yv} & $\zv$ &\cs{zv} \\[\smallskipamount]
+%    $\alphav$ &\cs{alphav} &
+%    $\betav$ &\cs{betav} &
+%    $\gammav$ &\cs{gammav} &
+%    $\deltav$ &\cs{deltav} \\
+%    $\epsilonv$ &\cs{epsilonv} &
+%    $\varepsilonv$ &\cs{varepsilonv} &
+%    $\zetav$ &\cs{zetav} &
+%    $\etav$ &\cs{etav} \\
+%    $\thetav$ &\cs{thetav} &
+%    $\varthetav$ &\cs{varthetav} &
+%    $\kappav$ &\cs{kappav} &
+%    $\lambdav$ &\cs{lambdav}
+%\end{tabular}
+%\end{center}
+%as well as for uppercase letters:
+%\begin{center}
+%  \begin{tabular}{llllllll}
+%    $\Am$ &\cs{Am} & $\Bm$ &\cs{Bm} & $\Cm$ &\cs{Cm} & $\Dm$ &\cs{Dm} \\
+%    $\Em$ &\cs{Em} & $\Fm$ &\cs{Fm} & $\Gm$ &\cs{Gm} & $\Hm$ &\cs{Hm} \\
+%    $\Imat$ &\cs{Imat} & $\Jm$ &\cs{Jm} & $\Km$ &\cs{Km} & $\Lm$ &\cs{Lm} \\
+%    $\Mm$ &\cs{Mm} & $\Nm$ &\cs{Nm} & $\Om$ &\cs{Om} & $\Pm$ &\cs{Pm} \\
+%    $\Qm$ &\cs{Qm} & $\Rm$ &\cs{Rm} & $\Sm$ &\cs{Sm} & $\Tm$ &\cs{Tm} \\
+%    $\Um$ &\cs{Um} & $\Vm$ &\cs{Vm} & $\Wm$ &\cs{Wm} & $\Xm$ &\cs{Xm} \\
+%    $\Ym$ &\cs{Ym} & $\Zm$ &\cs{Zm} \\[\smallskipamount]
+%    $\Gammam$ &\cs{Gammam} &
+%    $\Deltam$ &\cs{Deltam} &
+%    $\Thetam$ &\cs{Thetam} &
+%    $\Lambdam$ &\cs{Lambdam} \\
+%    $\Xim$ &\cs{Xim} &
+%    $\Pim$ &\cs{Pim} &
+%    $\Sigmam$ &\cs{Sigmam} &
+%    $\Upsilonm$ &\cs{Upsilonm} \\
+%    $\Phim$ &\cs{Phim} &
+%    $\Psim$ &\cs{Psim} &
+%    $\Omegam$ &\cs{Omegam}
+%\end{tabular}
+%\end{center}
+%\noindent
+%Internally these commands use \docAuxCommand*{vct} and \docAuxCommand*{mtr},
+%so that it is easy to change the notation for vectors and matrices.
+%
+%\DescribeMacro{\tr}\DescribeMacro{\inv} Finally, the macros
+%\docAuxCommand*{tr} and \docAuxCommand*{inv} are intended to be used in
+%superscripts, to denote the transpose and the inverse of a matrix.
+%
+%\subsection{Matrices}
+%The matrix environments provided by \package{amsmath} (namely
+%\docAuxEnvironment*{matrix}, \docAuxEnvironment*{pmatrix},
+%\docAuxEnvironment*{bmatrix}, \docAuxEnvironment*{bmatrix},
+%\docAuxEnvironment*{vmatrix} and \docAuxEnvironment*{Vmatrix}) are modified
+%to accept an optional argument specifying a column formatting like that of
+%\docAuxEnvironment*{tabular}.  This can be used to change the alignment of
+%columns and to add vertical rules, for example:
+%\iffalse
+%<*example>
+%\fi
+\begin{dispExample*}{sidebyside}
+\[
+\begin{bmatrix}[cc|c]
+  a & b & c \\ d & e & f
+\end{bmatrix}
+\]
+\end{dispExample*}
+%\iffalse
+%</example>
+%\fi
+%\noindent
+%By default, columns are right-aligned.
+%
+%\DescribeMacro{\arr} \DescribeMacro{\arr*} In addition to that, the
+%following shorthand macros are defined:
+%\begin{docCommand}{arr}{\oarg{cols}\marg{body}}
+%  Puts \meta{body} inside a \docAuxEnvironment*{bmatrix} environment.
+%\end{docCommand}
+%\begin{docCommand}{arr*}{\oarg{cols}\marg{body}}
+%  Puts \meta{body} inside a \docAuxEnvironment*{matrix} environment.
+%\end{docCommand}
+%
+%\subsection{Paired Delimiters and Operators}
+%\DescribeMacro{\set} \DescribeMacro{\abs} \DescribeMacro{\norm}
+%\DescribeMacro{\set*} \DescribeMacro{\abs*} \DescribeMacro{\norm*} The
+%following paired delimiters are defined:
+%\begin{center}
+%  \begin{tabular}{llllllll}
+%    $\set{\cdots}$ & \cs{set} &
+%    $\abs{\cdots}$ &\cs{abs} &
+%    $\norm{\cdots}$ &\cs{norm}
+%  \end{tabular}
+%\end{center}
+%The delimiters above are automatically extensible so that they match the
+%height of the enclosed material.  The starred alternatives
+%\docAuxCommand*{set*}, \docAuxCommand*{abs*} and \docAuxCommand*{norm*}
+%produce delimiters that are fixed in size.
+%
+%The following math operators are defined:
+%\begin{center}
+%  \begin{tabular}{llllllll}
+%    $\colsp$   & \cs{colsp}  &
+%    $\nullsp$  & \cs{nullsp} &
+%    $\rank$    & \cs{rank}   &
+%    $\trace$   & \cs{trace} \\
+%    $\diag$    & \cs{diag}   &
+%    $\sign$    & \cs{sign}
+%\end{tabular}
+%\end{center}
+%
+%\subsection{Additional Symbols}
+%The following additional symbols are defined
+%\begin{center}
+%  \begin{tabular}{llllllll}
+%    $\R$ &\cs{R} & $\Cset$ &\cs{Cset} & $\N$ &\cs{N} & $\Z$ &\cs{Z}
+%  \end{tabular}
+%\end{center}
+%
+%\StopEventually{^^A
+%^^A  \PrintChanges
+%}
+%
+%\section{Implementation}
+%\iffalse
+%<*package>
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{linalg}[2016/07/24 v1.0
+Convenience macros for typesetting linear algebra]
+%</package>
+%\fi
+%^^A Everything inside the macrocode environment is typeset verbatim.
+%    \begin{macrocode}
+%<*package>
+
+\RequirePackage{array}
+\RequirePackage{mathtools}      % loads amsmath and amssymb
+\RequirePackage{unicode-math}
+
+\unimathsetup{math-style=ISO,bold-style=upright}
+
+%% \symbf is from unicode-math
+\newcommand{\mtr}[1]{\symbf{#1}}
+\newcommand{\vct}[1]{\symbf{#1}}
+\newcommand{\av}{\vct{a}}
+\newcommand{\bv}{\vct{b}}
+\newcommand{\cv}{\vct{c}}
+\newcommand{\dv}{\vct{d}}
+\newcommand{\ev}{\vct{e}}
+\newcommand{\fv}{\vct{f}}
+\newcommand{\gv}{\vct{g}}
+\newcommand{\hvec}{\vct{h}}
+\newcommand{\iv}{\vct{i}}
+\newcommand{\jv}{\vct{j}}
+\newcommand{\kv}{\vct{k}}
+\newcommand{\lv}{\vct{l}}
+\newcommand{\mv}{\vct{m}}
+\newcommand{\nv}{\vct{n}}
+\newcommand{\ov}{\vct{o}}
+\newcommand{\pv}{\vct{p}}
+\newcommand{\qv}{\vct{q}}
+\newcommand{\rv}{\vct{r}}
+\newcommand{\sv}{\vct{s}}
+\newcommand{\tv}{\vct{t}}
+\newcommand{\uv}{\vct{u}}
+\newcommand{\vv}{\vct{v}}
+\newcommand{\wv}{\vct{w}}
+\newcommand{\xv}{\vct{x}}
+\newcommand{\yv}{\vct{y}}
+\newcommand{\zv}{\vct{z}}
+\newcommand{\alphav}{\vct{\alpha}}
+\newcommand{\betav}{\vct{\beta}}
+\newcommand{\gammav}{\vct{\gamma}}
+\newcommand{\deltav}{\vct{\delta}}
+\newcommand{\epsilonv}{\vct{\epsilon}}
+\newcommand{\varepsilonv}{\vct{\varepsilon}}
+\newcommand{\zetav}{\vct{\zeta}}
+\newcommand{\etav}{\vct{\eta}}
+\newcommand{\thetav}{\vct{\theta}}
+\newcommand{\varthetav}{\vct{\vartheta}}
+\newcommand{\kappav}{\vct{\kappa}}
+\newcommand{\lambdav}{\vct{\lambda}}
+\newcommand{\muv}{\vct{\mu}}
+\newcommand{\nuv}{\vct{\nu}}
+\newcommand{\xiv}{\vct{\xi}}
+\newcommand{\piv}{\vct{\pi}}
+\newcommand{\varpiv}{\vct{\varpi}}
+\newcommand{\rhov}{\vct{\rho}}
+\newcommand{\varrhov}{\vct{\varrho}}
+\newcommand{\sigmav}{\vct{\sigma}}
+\newcommand{\varsigmav}{\vct{\varsigma}}
+\newcommand{\tauv}{\vct{\tau}}
+\newcommand{\upsilonv}{\vct{\upsilon}}
+\newcommand{\phiv}{\vct{\phi}}
+\newcommand{\varphiv}{\vct{\varphi}}
+\newcommand{\chiv}{\vct{\chi}}
+\newcommand{\psiv}{\vct{\psi}}
+\newcommand{\omegav}{\vct{\omega}}
+\newcommand{\Am}{\mtr{A}}
+\newcommand{\Bm}{\mtr{B}}
+\newcommand{\Cm}{\mtr{C}}
+\newcommand{\Dm}{\mtr{D}}
+\newcommand{\Em}{\mtr{E}}
+\newcommand{\Fm}{\mtr{F}}
+\newcommand{\Gm}{\mtr{G}}
+\newcommand{\Hm}{\mtr{H}}
+\newcommand{\Imat}{\mtr{I}}
+\newcommand{\Jm}{\mtr{J}}
+\newcommand{\Km}{\mtr{K}}
+\newcommand{\Lm}{\mtr{L}}
+\newcommand{\Mm}{\mtr{M}}
+\newcommand{\Nm}{\mtr{N}}
+\newcommand{\Om}{\mtr{O}}
+\newcommand{\Pm}{\mtr{P}}
+\newcommand{\Qm}{\mtr{Q}}
+\newcommand{\Rm}{\mtr{R}}
+\newcommand{\Sm}{\mtr{S}}
+\newcommand{\Tm}{\mtr{T}}
+\newcommand{\Um}{\mtr{U}}
+\newcommand{\Vm}{\mtr{V}}
+\newcommand{\Wm}{\mtr{W}}
+\newcommand{\Xm}{\mtr{X}}
+\newcommand{\Ym}{\mtr{Y}}
+\newcommand{\Zm}{\mtr{Z}}
+\newcommand{\Gammam}{\mtr{\Gamma}}
+\newcommand{\Deltam}{\mtr{\Delta}}
+\newcommand{\Thetam}{\mtr{\Theta}}
+\newcommand{\Lambdam}{\mtr{\Lambda}}
+\newcommand{\Xim}{\mtr{\Xi}}
+\newcommand{\Pim}{\mtr{\Pi}}
+\newcommand{\Sigmam}{\mtr{\Sigma}}
+\newcommand{\Upsilonm}{\mtr{\Upsilon}}
+\newcommand{\Phim}{\mtr{\Phi}}
+\newcommand{\Psim}{\mtr{\Psi}}
+\newcommand{\Omegam}{\mtr{\Omega}}
+
+\newcommand{\tr}{{\top}}
+\newcommand{\inv}{{-1}}
+
+\newcommand\R{\mathbb{R}}
+\newcommand\Cset{\mathbb{C}}
+\newcommand\N{\mathbb{N}}
+\newcommand\Z{\mathbb{Z}}
+
+\DeclareMathOperator{\colsp}{col}
+\DeclareMathOperator{\nullsp}{nul}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\trace}{tr}
+\DeclareMathOperator{\diag}{diag}
+\DeclareMathOperator{\sign}{sgn}
+
+%% The following requires mathtools.
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}
+\DeclarePairedDelimiter\norm{\lVert}{\rVert}
+\DeclarePairedDelimiter\set{\{}{\}}
+%% Swap the definition of \abs* and \norm*, so that \abs
+%% and \norm resize the size of the brackets, and the 
+%% starred version does not.
+%% (https://tex.stackexchange.com/questions/43008/)
+\let\oldabs\abs
+\def\abs{\@ifstar{\oldabs}{\oldabs*}}
+\let\oldnorm\norm
+\def\norm{\@ifstar{\oldnorm}{\oldnorm*}}
+\let\oldset\set
+\def\set{\@ifstar{\oldset}{\oldset*}}
+
+%% Extend amsmath's internal macro to support an optional
+%% alignment argument in matrix, pmatrix, bmatrix, Bmatrix,
+%% vmatrix and Vmatrix environments.
+%% (https://tex.stackexchange.com/a/2244/13399)
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols r]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+
+%% Extended column specification syntax, e.g. cc|c,
+%% requires the array package.
+\newcommand{\arr}{\@ifstar\arr@star\arr@nostar}
+\newcommand{\arr@nostar}[2][*\c@MaxMatrixCols r]{%
+  \begin{bmatrix}[#1]#2\end{bmatrix}%
+}
+\newcommand{\arr@star}[2][*\c@MaxMatrixCols r]{%
+  \begin{matrix}[#1]#2\end{matrix}%
+}
+
+%</package>
+%    \end{macrocode}
+%\Finale
+
